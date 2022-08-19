@@ -13,15 +13,16 @@ public class PetService {
 
     OkHttpClient client = new OkHttpClient();
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final String baseUrl = "https://petstore.swagger.io/v2/pet/";
 
     public void uploadImg(File file, String id) throws IOException {
 
 
-        MediaType MEDIA_TYPE_IMG = MediaType.parse("image/*");
+        MediaType mediaTypeImg = MediaType.parse("image/*");
 
-        String url = "https://petstore.swagger.io/v2/pet/" + id + "/uploadImage";
+        String url = baseUrl + id + "/uploadImage";
 
-        RequestBody fileBody = RequestBody.create(file, MEDIA_TYPE_IMG);
+        RequestBody fileBody = RequestBody.create(file, mediaTypeImg);
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file", file.getName(), fileBody)
@@ -44,14 +45,14 @@ public class PetService {
 
 
     public void add(Pet newPet) throws IOException {
-        MediaType JSON
+        MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         String json = gson.toJson(newPet);
 
-        String url = "https://petstore.swagger.io/v2/pet";
+        String url = baseUrl;
 
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -66,16 +67,16 @@ public class PetService {
     }
 
     public void update(Pet pet, int petId) throws IOException {
-        MediaType JSON
+        MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         String json = gson.toJson(pet);
 
         //String id = String.valueOf(petId);
 
-        String url = "https://petstore.swagger.io/v2/pet/" + petId;
+        String url = baseUrl + petId;
 
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -90,7 +91,7 @@ public class PetService {
 
     public void findByStatus(String status) throws IOException {
 
-        String url = "https://petstore.swagger.io/v2/pet/findByStatus?status=" + status;
+        String url = baseUrl + "findByStatus?status=" + status;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -104,7 +105,7 @@ public class PetService {
     }
 
     public void findById(String id) throws IOException {
-        String url = "https://petstore.swagger.io/v2/pet/" + id;
+        String url = baseUrl + id;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -119,14 +120,14 @@ public class PetService {
 
 
     public void updateWithFormData(Pet pet, int petId) throws IOException {
-        MediaType JSON
+        MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         String json = gson.toJson(pet);
 
-        String url = "https://petstore.swagger.io/v2/pet/" + petId;
+        String url = baseUrl + petId;
 
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -140,7 +141,7 @@ public class PetService {
     }
 
     public void delete(String id) throws IOException {
-        String url = "https://petstore.swagger.io/v2/pet/" + id;
+        String url = baseUrl + id;
 
         Request request = new Request.Builder()
                 .url(url)

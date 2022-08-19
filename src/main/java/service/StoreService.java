@@ -15,18 +15,19 @@ public class StoreService {
 
     OkHttpClient client = new OkHttpClient();
     Gson gson = new Gson();
+    private final String baseUrl = "https://petstore.swagger.io/v2/store";
 
     public void addNewOrder(Order newOrder) throws IOException, InterruptedException {
 
 
-        MediaType JSON
+        MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         String json = gson.toJson(newOrder);
 
-        String url = "https://petstore.swagger.io/v2/store/order";
+        String url =  baseUrl + "/order";
 
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -41,7 +42,7 @@ public class StoreService {
 
     public void findOrderById(String orderId) throws IOException {
 
-        String url = "https://petstore.swagger.io/v2/store/order/" + orderId;
+        String url = baseUrl + "/order/" + orderId;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -55,7 +56,7 @@ public class StoreService {
     }
 
     public void deleteOrderById(String orderId) throws IOException {
-        String url = "https://petstore.swagger.io/v2/store/order/" + orderId;
+        String url = baseUrl + "/order/" + orderId;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -72,7 +73,7 @@ public class StoreService {
 
     public void getInventoriesByStatus() throws IOException {
 
-        String url = "https://petstore.swagger.io/v2/store/inventory";
+        String url = baseUrl + "/inventory";
 
         Request request = new Request.Builder()
                 .url(url)

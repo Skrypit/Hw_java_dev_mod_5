@@ -15,17 +15,18 @@ import java.util.Objects;
 public class UserService {
     OkHttpClient client = new OkHttpClient();
     Gson gson = new Gson();
+    private final String baseUrl = "https://petstore.swagger.io/v2/user/";
 
     public void createUser(User newUser) throws IOException, InterruptedException {
 
-        MediaType JSON
+        MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         String json = gson.toJson(newUser);
 
-        String url = "https://petstore.swagger.io/v2/user";
+        String url = baseUrl;
 
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -39,7 +40,7 @@ public class UserService {
     }
 
     public void deleteUserByName(String userName) throws IOException {
-        String url = "https://petstore.swagger.io/v2/user/" + userName;
+        String url = baseUrl + userName;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -55,7 +56,7 @@ public class UserService {
 
 
     public void getByNameUser(String userName) throws IOException {
-        String url = "https://petstore.swagger.io/v2/user/" + userName;
+        String url = baseUrl + userName;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -70,14 +71,14 @@ public class UserService {
 
     public void updateUser(User newUser, String userName) throws IOException {
 
-        MediaType JSON
+        MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         String json = gson.toJson(newUser);
 
-        String url = "https://petstore.swagger.io/v2/user/" + userName;
+        String url = baseUrl + userName;
 
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -91,7 +92,7 @@ public class UserService {
     }
 
     public void logsIn(String userName, String password) throws IOException {
-        String url = "https://petstore.swagger.io/v2/user/login?username=" + userName + "&password=" + password;
+        String url = baseUrl + "login?username=" + userName + "&password=" + password;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -105,7 +106,7 @@ public class UserService {
     }
 
     public void logsOut() throws IOException {
-        String url = "https://petstore.swagger.io/v2/user/logout";
+        String url = baseUrl + "logout";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -120,14 +121,14 @@ public class UserService {
 
     public void createUsersList(List<User> users) throws IOException {
 
-        MediaType JSON
+        MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         String json = gson.toJson(users);
 
-        String url = "https://petstore.swagger.io/v2/user/createWithList";
+        String url = baseUrl + "createWithList";
 
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
                 .url(url)
@@ -142,14 +143,14 @@ public class UserService {
 
     public void createWithArray(User[] users) throws IOException {
 
-        MediaType JSON
+        MediaType mediaType
                 = MediaType.get("application/json; charset=utf-8");
 
         String json = gson.toJson(users);
 
-        String url = "https://petstore.swagger.io/v2/user/createWithArray";
+        String url = baseUrl + "createWithArray";
 
-        RequestBody body = RequestBody.create(json, JSON);
+        RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
                 .url(url)

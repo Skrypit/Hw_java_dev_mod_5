@@ -1,5 +1,6 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
@@ -11,7 +12,13 @@ public class Pet {
     Tag tag;
     PetStatus petStatus;
 
+
     public enum PetStatus {
-        available, pending, sold
+        @SerializedName("available")
+        AVAILABLE,
+        @SerializedName("pending")
+        PENDING,
+        @SerializedName("sold")
+        SOLD
     }
 }
