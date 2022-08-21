@@ -15,7 +15,7 @@ import java.util.Objects;
 public class UserService {
     OkHttpClient client = new OkHttpClient();
     Gson gson = new Gson();
-    private final String baseUrl = "https://petstore.swagger.io/v2/user/";
+    private final static String BASE_URL = "https://petstore.swagger.io/v2/user/";
 
     public void createUser(User newUser) throws IOException, InterruptedException {
 
@@ -24,12 +24,10 @@ public class UserService {
 
         String json = gson.toJson(newUser);
 
-        String url = baseUrl;
-
         RequestBody body = RequestBody.create(json, mediaType);
 
         Request request = new Request.Builder()
-                .url(url)
+                .url(BASE_URL)
                 .post(body)
                 .build();
 
@@ -40,7 +38,7 @@ public class UserService {
     }
 
     public void deleteUserByName(String userName) throws IOException {
-        String url = baseUrl + userName;
+        String url = BASE_URL + userName;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -54,9 +52,8 @@ public class UserService {
         }
     }
 
-
     public void getByNameUser(String userName) throws IOException {
-        String url = baseUrl + userName;
+        String url = BASE_URL + userName;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -76,7 +73,7 @@ public class UserService {
 
         String json = gson.toJson(newUser);
 
-        String url = baseUrl + userName;
+        String url = BASE_URL + userName;
 
         RequestBody body = RequestBody.create(json, mediaType);
 
@@ -92,7 +89,8 @@ public class UserService {
     }
 
     public void logsIn(String userName, String password) throws IOException {
-        String url = baseUrl + "login?username=" + userName + "&password=" + password;
+
+        String url = BASE_URL + "login?username=" + userName + "&password=" + password;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -106,7 +104,7 @@ public class UserService {
     }
 
     public void logsOut() throws IOException {
-        String url = baseUrl + "logout";
+        String url = BASE_URL + "logout";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -126,7 +124,7 @@ public class UserService {
 
         String json = gson.toJson(users);
 
-        String url = baseUrl + "createWithList";
+        String url = BASE_URL + "createWithList";
 
         RequestBody body = RequestBody.create(json, mediaType);
 
@@ -148,7 +146,7 @@ public class UserService {
 
         String json = gson.toJson(users);
 
-        String url = baseUrl + "createWithArray";
+        String url = BASE_URL + "createWithArray";
 
         RequestBody body = RequestBody.create(json, mediaType);
 
